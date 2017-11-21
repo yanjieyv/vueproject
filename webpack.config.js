@@ -35,7 +35,7 @@ module:{
             loader:'style-loader!css-loader!sass-loader'
         },
         {
-            test:/\.(png|jpg|gif)$/,
+            test:/\.(png|jpg|gif|woff|ttf)$/,
             loader:'url-loader?limit=5120'
         },
         {
@@ -48,10 +48,6 @@ module:{
             exclude:/node_modules/
         },
     ]
-},
-babel:{
-    presers:['es2015'],
-    plugins:['transform-runtime']
 },
 plugins:[
     new htmlwp({
