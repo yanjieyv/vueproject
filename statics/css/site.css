@@ -158,3 +158,6 @@ text-decoration: none;
 .abread2{
     padding: 5px;
 }
+.el-pagination__editor.el-input .el-input__inner{
+    height: 20px;
+  }
