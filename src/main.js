@@ -22,13 +22,19 @@ var router = new VueRouter({
 // 导入element-ui
 import elementUi from 'element-ui';
 // 导入默认样式
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-default/index.css';
 // 覆盖默认样式
 import '../statics/theme_rms/index.css';
 // 全局样式
 import '../statics/css/site.css';
 // 绑定到vue
 Vue.use(elementUi);
+// 导入axios包
+import axios from 'axios';
+// 设置默认请求域名
+axios.defaults.baseURL = "http://127.0.0.1:8899";
+// 绑定axios到vue的原型上
+Vue.prototype.$ajax = axios;
 new Vue({
     el: '#app',
     router,

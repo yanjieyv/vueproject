@@ -18,6 +18,6 @@
 <style>
     html,body{
         /* min-width: 1536px; */
-        min-height: 734px;
+        height: 100%;
     }
 </style>

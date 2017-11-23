@@ -15,7 +15,7 @@
           <el-button size="small">删除</el-button> 
       </el-col>
       <el-col :offset="13" :span="4">
-        <el-input placeholder="请输入搜索内容" icon="el-icon-search" v-model="input2" :on-icon-click="getlist">
+        <el-input placeholder="请输入搜索内容" icon="search" v-model="searchvalue" :on-icon-click="getlist">
           <i class="el-input__icon el-icon-search is-clickable"></i>
         </el-input>
       </el-col>
@@ -44,7 +44,9 @@
 
     <el-table-column label="属性" width="120">
       <template scope="scope">
-        <a href="3">修改</a>
+        <!-- scope指向table里的：data绑定的对象 -->
+        <i v-bind="{class:'el-icon-picture '+(scope.row.is_slide == 1?'':'unlinght')}"></i>
+        <i v-bind="{class:'el-icon-upload '+(scope.row.is_top==1?'':'unlinght') }"></i>
       </template>
     </el-table-column>
 
@@ -85,7 +87,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      input2: "",
+      searchvalue: "",
       list:[],
       pageIndex:1,
       pageSize:10,
@@ -95,17 +97,29 @@ export default {
 
   methods: {
     getlist() {
-      var url = "http://192.168.84.200/admin/goods/getlist?pageIndex=1&pageSize=10";
-      axios.get(url).then(res=>{
+      // /admin/goods/getlist?pageIndex=页码&pageSize=每页显示条数&searchvalue=模糊匹配标题条件
+      // var url = "http://192.168.84.200/admin/goods/getlist?pageIndex=1&pageSize=10";
+      var url = '/admin/goods/getlist?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&searchvalue='+this.searchvalue;
+      this.$ajax.get(url).then(res=>{
         // console.log(res);
+        this.pageTotal = res.data.totalcount;
         this.list = res.data.message;
       }).catch(error=>{
         console.log(error);
       })
     },
     handleSelectionChange(){},
-    handleSizeChange(){},
-    handleCurrentChange(){},
+    handleSizeChange(val){
+      // console.log(val);
+      this.pageSize = val;
+      this.getlist();
+    },
+    handleCurrentChange(val){
+      // console.log(val);
+      
+      this.pageIndex = val;
+      this.getlist();
+    },
   },
   mounted(){
     this.getlist();
@@ -136,6 +150,9 @@ export default {
 .listedit {
   color: #2a72c5;
   font-size: 12px;
+}
+.unlinght{
+  color:rgba(0,0,0,0.3);
 }
 
 </style>

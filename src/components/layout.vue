@@ -7,7 +7,7 @@
       <el-col :span="4">
         <div class="layout menu">
           <img style="width:100%" src="../../statics/imgs/logo.png" alt="">
-          <el-menu default-active="2" class="el-menu-vertical-demo">
+          <el-menu default-active="1-2" class="el-menu-vertical-demo">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-message"></i>购物商城</template>
@@ -16,7 +16,7 @@
                 <router-link to="/admin/goodslists">
                   <el-menu-item index="1-2">分类管理</el-menu-item>
                 </router-link>
-                <el-menu-item index="1-2">评论管理</el-menu-item>
+                <el-menu-item index="1-3">评论管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -25,7 +25,7 @@
               <el-menu-item-group>
                 <el-menu-item index="2-1">内容管理</el-menu-item>
                 <el-menu-item index="2-2">分类管理</el-menu-item>
-                <el-menu-item index="2-2">评论管理</el-menu-item>
+                <el-menu-item index="2-3">评论管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>
@@ -72,7 +72,17 @@
       return {};
     },
 
-    methods: {}
+    methods: {
+      getHeight(){
+        // console.dir(document.querySelector("html"));
+        document.querySelector(".layout").style.height = document.querySelector("html").clientHeight+'px';
+        // console.dir(document.querySelector(".layout"));
+        // console.log(document.querySelector("html").clientHeight);
+      }
+    },
+    mounted(){
+      this.getHeight();
+    }
   };
 </script>
 <style scoped>
